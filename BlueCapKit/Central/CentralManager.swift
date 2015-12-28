@@ -216,14 +216,17 @@ public class CentralManager : NSObject, CBCentralManagerDelegate {
     }
     
     public func didDiscoverPeripheral(peripheral:CBPeripheralWrappable, advertisementData:[String:AnyObject], RSSI:NSNumber) {
-        if self.discoveredPeripherals[peripheral.identifier] == nil {
-            let bcPeripheral = Peripheral(cbPeripheral:peripheral, centralManager:self, advertisements:advertisementData, rssi:RSSI.integerValue)
-            Logger.debug("peripheral name \(bcPeripheral.name)")
-            self.discoveredPeripherals[peripheral.identifier] = bcPeripheral
-            self.afterPeripheralDiscoveredPromise.success(bcPeripheral)
-        }
+        if let periph = self.discoveredPeripherals[peripheral.identifier] {
+			periph.rssi = RSSI.integerValue
+			self.afterPeripheralDiscoveredPromise.success(periph)
+		} else {
+			let bcPeripheral = Peripheral(cbPeripheral:peripheral, centralManager:self, advertisements:advertisementData, rssi:RSSI.integerValue)
+			Logger.debug("peripheral name \(bcPeripheral.name)")
+			self.discoveredPeripherals[peripheral.identifier] = bcPeripheral
+			self.afterPeripheralDiscoveredPromise.success(bcPeripheral)
+		}
     }
-    
+	
     public func didFailToConnectPeripheral(peripheral:CBPeripheralWrappable, error:NSError?) {
         Logger.debug()
         if let bcPeripheral = self.discoveredPeripherals[peripheral.identifier] {

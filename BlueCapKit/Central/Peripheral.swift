@@ -129,10 +129,10 @@ public class Peripheral : NSObject, CBPeripheralDelegate {
     internal var timeoutRetries : UInt?
     internal var disconnectRetries : UInt?
     internal weak var centralManager : CentralManager?
-    internal let cbPeripheral : CBPeripheralWrappable
+	public let cbPeripheral : CBPeripheralWrappable
     
     public let advertisements : PeripheralAdvertisements
-    public let rssi : Int
+    public var rssi : Int
 
     public var discoveredAt : NSDate {
         return self._discoveredAt
@@ -146,12 +146,8 @@ public class Peripheral : NSObject, CBPeripheralDelegate {
         return self._disconnectedAt
     }
     
-    public var name : String {
-        if let name = self.cbPeripheral.name {
-            return name
-        } else {
-            return "Unknown"
-        }
+    public var name : String? {
+        return self.cbPeripheral.name
     }
 
     public var state : CBPeripheralState {
