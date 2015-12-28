@@ -420,7 +420,7 @@ public class Characteristic {
                 Logger.debug("timing out sequence=\(sequence), current writeSequence=\(self.writeSequence)")
                 self.didWrite(BCError.characteristicWriteTimeout)
             } else {
-                Logger.debug("timeout expired")
+                //Logger.debug("timeout expired")
             }
         }
     }
