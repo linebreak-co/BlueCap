@@ -104,7 +104,7 @@ public class CentralManager : NSObject, CBCentralManagerDelegate {
 
     // scanning
     public func startScanning(capacity:Int? = nil, options: [String:AnyObject]? = nil) -> FutureStream<Peripheral> {
-        return self.startScanningForServiceUUIDs(nil, capacity: capacity)
+        return self.startScanningForServiceUUIDs(nil, capacity: capacity, options: options)
     }
     
     public func startScanningForServiceUUIDs(uuids: [CBUUID]?, capacity: Int? = nil, options: [String:AnyObject]? = nil) -> FutureStream<Peripheral> {
