@@ -109,7 +109,11 @@ public class CentralManager : NSObject, CBCentralManagerDelegate {
     
     public func startScanningForServiceUUIDs(uuids: [CBUUID]?, capacity: Int? = nil, options: [String:AnyObject]? = nil) -> FutureStream<Peripheral> {
         if !self._isScanning {
-            Logger.debug("UUIDs \(uuids)")
+            if let uuids = uuids {
+                Logger.debug("Scanning for UUIDs: \(uuids)")
+            } else {
+                Logger.debug("Scanning, no UUIDs")
+            }
             self._isScanning = true
             if let capacity = capacity {
                 self.afterPeripheralDiscoveredPromise = StreamPromise<Peripheral>(capacity:capacity)
