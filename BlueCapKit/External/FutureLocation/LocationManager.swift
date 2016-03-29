@@ -13,7 +13,7 @@ import CoreLocation
 // LocationManagerImpl
 public protocol LocationManagerWrappable {
     
-    typealias WrappedCLLocation
+    associatedtype WrappedCLLocation
     
     var location : WrappedCLLocation? {get}
     

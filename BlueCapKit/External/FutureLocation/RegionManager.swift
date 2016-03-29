@@ -13,7 +13,7 @@ import CoreLocation
 // RegionManagerImpl
 public protocol RegionManagerWrappable {
     
-    typealias WrappedRegion
+    associatedtype WrappedRegion
     
     var regions : [WrappedRegion] {get}
     

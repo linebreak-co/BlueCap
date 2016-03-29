@@ -21,7 +21,8 @@ public class BeaconRegion : Region, BeaconRegionWrappable {
         } else {
             power = self.clBeaconRegion.peripheralDataWithMeasuredPower(nil) as [NSObject:AnyObject]
         }
-        return power.keys.reduce([String:AnyObject]()){(var result, key) in
+        return power.keys.reduce([String:AnyObject]()){(resultIn, key) in
+            var result = resultIn
             if let keyPower = power[key], key = key as? String {
                 result[key] = keyPower
             }

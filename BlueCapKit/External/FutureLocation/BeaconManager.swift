@@ -13,7 +13,7 @@ import CoreLocation
 //// BeaconManagerImpl
 public protocol BeaconManagerWrappable {
 
-    typealias WrappedBeaconRegion
+    associatedtype WrappedBeaconRegion
 
     var beaconRegions : [WrappedBeaconRegion] {get}
     
